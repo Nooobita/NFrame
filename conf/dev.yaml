@@ -1,0 +1,63 @@
+# 默认开发用配置
+
+svr_config:
+    host: 0.0.0.0
+    port: 54321
+    debug: True
+
+logging_config:
+    default: app
+    app:
+        level: debug
+        datefmt: '%Y-%m-%d %H:%M:%S'
+        enable_color: yes
+        format:
+            - '[%(levelname)s%(ctx_id)s|%(asctime)s|%(name)s:%(lineno)s|(%(funcName)s)]'
+            - '%(message)s'
+    peewee: debug
+    werkzeug:
+        level: debug
+        datefmt: '%Y-%m-%d %H:%M:%S'
+        enable_color: no
+        format: '[%(levelname)s%(ctx_id)s|%(asctime)s|%(name)s:%(lineno)s|(%(funcName)s)]%(message)s'
+    flask_redis_cookie: info
+    null:
+        level: debug
+        datefmt: '%Y-%m-%d %H:%M:%S'
+        enable_color: no
+        format: '[%(levelname)s|%(asctime)s|%(name)s:%(lineno)s|(%(funcName)s)]%(message)s'
+
+databases:
+    zj3:
+        engine: mysql
+        database: zhijian2
+        params:
+            host: 192.168.10.66
+            port: 3306
+            user: j
+            password: 7lk_root
+    zj3user:
+        engine: mysql
+        database: zhijian2_apisvr
+        params:
+            host: 192.168.10.66
+            port: 3306
+            user: j
+            password: 7lk_root
+
+inner_api:
+    ucenter:
+        url_prefix: http://127.0.0.1:55100/uc
+
+apilist_path: /apilist
+
+session:
+    name: 'zjsess'  # 客户端cookie名
+    key_pairs: 'helloworld'  # cookie校验密钥
+    prefix: 'session_'  # redis保存前缀
+    tmp_age: 3600  # 默认cookie保存时间
+    max_age: 604800 # 3600 * 24 * 7  # 默认cookie最大保存时间
+    redis:
+        host: localhost
+        port: 6379
+        db: 0
