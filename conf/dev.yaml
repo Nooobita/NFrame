@@ -30,20 +30,20 @@ logging_config:
 databases:
     zj3:
         engine: mysql
-        database: zhijian2
+        database: z2
         params:
-            host: 192.168.10.66
+            host: 192.168.10.00
             port: 3306
-            user: j
-            password: 7lk_root
+            user: j22
+            password: 7888
     zj3user:
         engine: mysql
-        database: zhijian2_apisvr
+        database: z2_api
         params:
-            host: 192.168.10.66
+            host: 192.168.10.00
             port: 3306
-            user: j
-            password: 7lk_root
+            user: jjj
+            password: 7999
 
 inner_api:
     ucenter:
