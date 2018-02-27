@@ -38,3 +38,41 @@ class SnakeNameModel(NBaseModel):
         else:
             return cls.delete()
 
+    @classmethod
+    def n_get_by_id(cls, id):
+        if cls._meta.primary_key is not False:
+            pk_field = cls._meta.primary_key
+            condi = pk_field == id
+            return cls.select().where(condi).no_deleted().get_or_none()
+        else:
+            return None
+
+    @classmethod
+    def n_search_by_ids(cls, ids):
+        if cls._meta.primary_key is not False:
+            pk_field = cls._meta.primary_key
+            condi = pk_field << ids
+            return cls.select().where(condi).no_deleted()
+        else:
+            return []
+
+    def n_save(self, force_insert=False, only=None):
+        pk_value = None
+        if self._meta.primary_key is not False:
+            pk_value = self.get_id()
+
+        now = datetime.now()
+        if pk_value:
+            if hasattr(self, 'update_at'):
+                self.update_at = now
+        else:
+            if hasattr(self, 'create_at') and self.create_at is None:
+                self.create_at = now
+            if hasattr(self, 'update_at') and self.update_at is None:
+                self.update_at = now
+
+        return self.save(force_insert, only)
+
+    def n_delete_instance(self):
+
+        return self.n_delete().where(self._pk_expr()).execute()

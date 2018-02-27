@@ -11,7 +11,6 @@ def load_contents(root_path, file_suffix, package, obj_filter, locals_dict, all_
         if not src_file.endswith(file_suffix + '.py'):
             continue
 
-
         m = importlib.import_module(
             '.' + src_file[:-3],
             package=package
